@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: crash-loop-demo
+  namespace: monitoring  # Same namespace as your alerts
+spec:
+  containers:
+  - name: busybox-crashing
+    image: busybox
+    command: ["/bin/sh", "-c", "echo 'Crashing in 5 seconds...'; sleep 5; exit 1"]
+  restartPolicy: OnFailure  # Will restart after each crash
